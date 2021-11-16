@@ -1,4 +1,5 @@
 .idea
 assets/
 bin/
+out/
 .classpath
