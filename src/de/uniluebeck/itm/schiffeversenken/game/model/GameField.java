@@ -25,9 +25,17 @@ public final class GameField {
 	 * @param size The size of the new game field to use.
 	 */
 	public GameField(Vec2 size) {
-		this.size = new Vec2(1, 1);
-		this.field = new FieldTile[1][1];
-		field[0][0] = new FieldTile();
+		this.size = new Vec2(size.getX(), size.getY()); //set size to method parameter value
+		this.field = new FieldTile[size.getX()][size.getY()]; //create new field with size
+
+		//iterate over columns and rows
+		for (int x = 0; x < size.getX(); x++) {
+			for (int y = 0; y < size.getY(); y++) {
+				field[x][y] = new FieldTile();
+			}
+		}
+
+		this.ships = new LinkedList<>(); //initialize ships
 	}
 
 	/**
