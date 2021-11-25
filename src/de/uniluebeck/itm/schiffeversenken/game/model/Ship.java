@@ -35,7 +35,7 @@ public class Ship {
 	 * @return boolean
 	 */
 	public boolean isSunken() {
-		return false;
+		return hits == length; //return true if hits match ship length
 	}
 
 	/**
