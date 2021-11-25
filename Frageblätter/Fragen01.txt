@@ -1,0 +1,52 @@
+                                  Fragen zum Aufgabenblatt 01
+
+
+zu Aufgabe 1:
+1) Warum muss bei der Methode hit() sichergestellt werden, dass das Schiff nicht bereits gesunken ist?
+
+
+
+
+zu Aufgabe 2:
+1) Testen Sie die Konsolenausgabe der nicht transponierten Matrix und überlegen Sie sich, warum dies so geschieht.
+
+
+
+
+zu Aufgabe 3:
+1) Informieren Sie sich über enums und wie sie eingesetzt werden. Wie sieht ihre Struktur (Syntax) aus?
+
+
+2) Beschreiben Sie, was die Methode bombard() im Detail macht.
+
+
+3) Welchen Status haben die FieldTiles(Kästchen) und die Schiffsliste nach dem Erzeugen eines Spielfeldes?
+
+
+4) Was wird in der Methode getTileAt() getestet, damit das Programm nicht einfach abstürzt?
+
+
+
+
+zu Aufgabe 4:
+1) Wie groß ist der Wert von tileSize? Woher bekommen Sie diese Information?
+
+
+2) Mit welchem Code können Sie in der Klasse GameFieldRenderer die Anzahl Spalten und Zeilen des Spielfeldes ermitteln?
+
+
+3) Woraus geht hervor, an welcher Stelle das Spielfeld gezeichnet werden soll?
+
+
+Als Hilfe zum Rasterzeichnen legen Sie sich bitte eine Skizze zum Spielfeld an und tragen die zugehörigen Werte ein.
+
+
+
+zu Aufgabe 5:
+1) Wo verwenden Sie Zeilenkommentare, wo Javadoc-Kommentare?
+
+
+2) Was sollen Javadoc-Kommentare aussagen?
+
+
+3) Welche Annotationen müssen Sie im Javadoc-Kommentar vor einer Methode berücksichtigen?
