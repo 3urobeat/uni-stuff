@@ -4,49 +4,89 @@
 zu Aufgabe 1:
 1) Warum muss bei der Methode hit() sichergestellt werden, dass das Schiff nicht bereits gesunken ist?
 
+Da das Schiff nicht mehr getroffen werden darf wenn es bereits gesunken ist und deshalb keine hits auf das gesunkene Schiff mehr gezählt werden dürfen.
 
 
 
 zu Aufgabe 2:
 1) Testen Sie die Konsolenausgabe der nicht transponierten Matrix und überlegen Sie sich, warum dies so geschieht.
 
-
+Weil die Matrix in initMatrix() Reihe für Reihe gefüllt wird, anstatt Spalte für Spalte, so wie die transponierte Matrix aussehen würde und im Aufgabenblatt erwartet wird. Füllt man die Matrix jedoch andersherum (Spalte für Spalte), so wäre sie direkt von Anfang an "transponiert".
 
 
 zu Aufgabe 3:
 1) Informieren Sie sich über enums und wie sie eingesetzt werden. Wie sieht ihre Struktur (Syntax) aus?
 
+Enums sind Zustände/Modi/Konstanten. Sie werden ähnlich wie eine Klasse definiert und repräsentieren z.B. den Status eines GPIO Pins (HIGH, LOW). Sie sind vielseitiger als booleans und können somit mehr Zustände treffend darstellen.
+Enums werden in CAPS geschrieben.
+
+enum Wetter {
+    REGEN,
+    SONNE,
+    WOLKEN,
+    SCHNEE
+}
+
+Wetter status = Wetter.SONNE;
+
 
 2) Beschreiben Sie, was die Methode bombard() im Detail macht.
+
+Es wird der aktuelle enum/Status des Objekts dieses Feldes in ein (nicht richtig eingerücktes) switch case Statement gegeben und auf STATE_MISSED, STATE_SHIP, STATE_SHIP_HIT oder STATE_WATER überprüft. Sollte keiner der Stadien erfüllt sein, wird false returned (default).
+
+Ist der enum *MISSED, wird einfach false returned, wird *SHIP ausgelöst, so wird der enum von tilestate zu *SHIP_HIT gesetzt, die Methode hit() des getroffenen Ships gecalled (die dann einen hit zählt) und true returned.
+Im Falle *SHIP_HIT wird wieder mal nur false returned und im Falle *WATER wid der tilestate enum zu *MISSED gesetzt und ebenfalls false returned.
+In jeglichen anderen Fällen wird der oben genannte default Wert, false, zurückgegeben.
 
 
 3) Welchen Status haben die FieldTiles(Kästchen) und die Schiffsliste nach dem Erzeugen eines Spielfeldes?
 
+Der Status von FieldTiles ist standardmäßig STATE_WATER.
+Die Schiffsliste hat keinen "Status"/Enum, sie ist eine leere LinkedList vom Typ List mit dem Inhalt eines Ship Objektes.
+
 
 4) Was wird in der Methode getTileAt() getestet, damit das Programm nicht einfach abstürzt?
 
+Es wird unknown im default case zurückgegeben, sollte kein anderer Enum zutreffen. So wird sichergestellt dass die Methode etwas zurückgibt.
 
+
+(Randnotiz, bitte nicht bewerten aber gerne beantworten): Warum wird der default case ganz oben abgefragt und nicht unten? Kann theoretisch überhaupt ein anderer Fall eintreten? Switch case Statements basieren doch auf einem Art "Wasserfall" Prinzip und default soll sozusagen den "Fehler", wenn nichts angeschlagen hat, auffangen (zumindest kenne ich das so aus Node.js).
 
 
 zu Aufgabe 4:
 1) Wie groß ist der Wert von tileSize? Woher bekommen Sie diese Information?
 
+tileSize ist eine in einer anderen Klasse definierte Konstante, die importiert wird. Somit wird sichergestellt dass die tileSize immer die gleiche ist und kann außerdem sehr einfach an nur einem Punkt global verändert werden.
+
 
 2) Mit welchem Code können Sie in der Klasse GameFieldRenderer die Anzahl Spalten und Zeilen des Spielfeldes ermitteln?
 
+int zeilen  = width / tileSize;
+int spalten = height / tileSize;
+
 
 3) Woraus geht hervor, an welcher Stelle das Spielfeld gezeichnet werden soll?
+
+Die Methodenparameter x und y von renderGameField() bezeichnen die 0,0 Koordinate des Spielfeldes auf dem Canvas.
+Ab der Koordinate können wir dann mit Hilfe von Vektoren das Spielfeld zeichnen.
 
 
 Als Hilfe zum Rasterzeichnen legen Sie sich bitte eine Skizze zum Spielfeld an und tragen die zugehörigen Werte ein.
 
 
-
 zu Aufgabe 5:
 1) Wo verwenden Sie Zeilenkommentare, wo Javadoc-Kommentare?
+
+Zeilenkommentare werden benutzt um eine Stelle im Code zu erklären.
+JavaDoc gibt einer Methode, sowie den Parametern, eine Beschreibung, um dem Nutzer beim Aufrufen der Methode, mit Hilfe von IntelliSense, eine Hilfestellung über die Verwendung der Methode zu geben.
+Sie sind ungeeignet als Anmerkungen im Code selber, bzw können dort garnicht angegeben werden.
 
 
 2) Was sollen Javadoc-Kommentare aussagen?
 
+JavaDoc Kommentare geben einer Methode und ihren Parametern eine Beschreibung, um dem Nutzer beim Aufrufen der Methode, mit Hilfe von IntelliSense, eine Hilfestellung über die Verwendung der Methode zu geben.
+(Siehe Aufg 5.1)
 
 3) Welche Annotationen müssen Sie im Javadoc-Kommentar vor einer Methode berücksichtigen?
+
+Zuerst wird der Methode eine Beschreibung gegeben. Danach kann mit Vorwörtern wie @param, @author, @return, etc. z.B. einem Parameter eine Beschreibung zugewiesen werden, der Autor einer Methode/Klasse angemerkt werden usw.
