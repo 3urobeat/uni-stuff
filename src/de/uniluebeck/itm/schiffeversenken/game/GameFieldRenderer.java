@@ -8,6 +8,9 @@ import de.uniluebeck.itm.schiffeversenken.game.model.*;
  *
  * It only contains methods designated to rendering a game field. In future it will also provide scroll bars in case the
  * field doesn't fit on the canvas.
+ *
+ * @author modified by T. Goritz, L. Janßen
+ *
  */
 public class GameFieldRenderer {
 

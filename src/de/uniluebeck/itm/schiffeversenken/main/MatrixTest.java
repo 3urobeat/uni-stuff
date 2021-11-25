@@ -1,12 +1,20 @@
 package de.uniluebeck.itm.schiffeversenken.main;
 
+/**
+ * Exercise about 2D Arrays
+ * @author T. Goritz, L. Janßen
+ *
+ */
 public class MatrixTest {
     int rows = 10;
     int cols = 10;
 
     int[][] field = new int[cols][rows];
 
-
+    /**
+     * Initializes a Matrix
+     * @param args default parameter
+     */
     public static void main(String[] args) {
         MatrixTest mt = new MatrixTest();
 
@@ -18,7 +26,7 @@ public class MatrixTest {
     }
 
     /**
-     * Initializes a 2D array with the dimensions of rows & cols
+     * Initializes a 2D array with the dimensions of rows and cols
      */
     public void initMatrix() {
         //Iterate over each column in each row and assign the value to that field
