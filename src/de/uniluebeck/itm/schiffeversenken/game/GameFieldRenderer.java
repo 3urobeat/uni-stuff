@@ -42,10 +42,26 @@ public class GameFieldRenderer {
         final int width = tileSize * this.field.getSize().getX();
         final int height = tileSize * this.field.getSize().getY();
 
-        // TODO: Draw a border around the field
 
-        // TODO: draw lines as border between cell
+        //Draw borders between each row/column of fields
+        c.setColor(0, 0, 0); //set color of lines to draw
 
+        for (int posX = x; posX < width - tileSize; posX += tileSize) { //iterate over x axis
+            c.drawLine(new Vec2(posX + tileSize, y), new Vec2(posX + tileSize, height + y)); //draw line for y axis on this x coordinate
+        }
+
+        for (int posY = y; posY < height; posY += tileSize) { //iterate over y axis
+            c.drawLine(new Vec2(x, posY + tileSize), new Vec2(width + x, posY + tileSize)); //draw line for x axis on this y coordinate
+        }
+
+
+        //Draw a border around the canvas
+        c.setColor(1, 1, 1); //set color of lines to draw
+
+        c.drawLine(new Vec2(x, y), new Vec2(x, height + y));
+        c.drawLine(new Vec2(x, height + y), new Vec2(width + x, height + y));
+        c.drawLine(new Vec2(width + x, height + y), new Vec2(width + x, y));
+        c.drawLine(new Vec2(width + x, y), new Vec2(x, y));
     }
 
     /**
