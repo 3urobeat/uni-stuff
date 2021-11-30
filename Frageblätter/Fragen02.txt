@@ -1,0 +1,23 @@
+                                   Fragen zum Aufgabenblatt 02
+
+Hinweise und Fragen zu Aufgabe 2.1:
+1) Lesen Sie in der HTML-Datei "Übersicht Szenen -- Verhalten beim Szenenwechsel":
+   -- Was bewirken attach() und detatch()?
+
+2) Lesen Sie in der HTML-Datei den Abschnitt "Workdispatcher -- Wie man den Workdispatcher nutzt"
+   -- Warum wird der Workdispatcher in 2.1 eingesetzt?
+
+Nach Bearbeitung der Aufgabe 2.1:
+   Beim Versuch, ein Schiff zu platzieren, wird jetzt an der Maus angeheftet das Schiff angezeigt.
+   Testen Sie dies aus, auch mit Einsatz der Taste R. Registrieren Sie, wie die Schiffe später aussehen sollen, 
+   auch wenn sie jetzt noch nicht platziert werden (siehe auch Abb. 1).
+
+Fragen zu Aufgabe 2.2:
+1) Welche Klasse beinhaltet die Methoden zum  Verändern des Status einer Kachel im Spielfeld?
+2) Wo können Sie ersehen, dass die Schiffe noch nur aus mittleren Schiffsteilen bestehen?
+
+Fragen zu Aufgabe 2.3:
+1) Was müssen Sie beachten, damit die Schiffe der Länge eins korrekt im Spielfeld angezeigt werden?
+2) Warum müssen die Spielfeldgrenzen beachtet werden? Was geschieht, wenn dies nicht gemacht wird?
+
+
