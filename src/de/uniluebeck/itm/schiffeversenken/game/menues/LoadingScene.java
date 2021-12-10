@@ -60,24 +60,27 @@ public class LoadingScene extends Scene {
 				{"right.ship.single.hit", "assets/32x32/Tile_singleship_right_hit_32x32_uint8_rgba.png"},
 				{"arrow.down", "assets/32x32/Tile_arrow_down_32x32_uint8_rgba.png"}};
 
-		this.c.dispatchWork(new Runnable() {
-			@Override
-			public void run() {
-				AssetRegistry.registerTile(tiles[0][0], Application.loadTile(tiles[0][1]));
-			}
-		});
-		this.c.dispatchWork(new Runnable() {
-			@Override
-			public void run() {
-				AssetRegistry.registerTile(tiles[1][0], Application.loadTile(tiles[1][1]));
-			}
-		});
-		this.c.dispatchWork(new Runnable() {
-			@Override
-			public void run() {
-				AssetRegistry.registerTile("7seg.0", Application.loadTile("assets/7seg/0_small.png"));
-			}
-		});
+		//Load all existing tiles from the array above
+		for (String[] tile : tiles) {
+			this.c.dispatchWork(new Runnable() {
+				@Override
+				public void run() {
+					AssetRegistry.registerTile(tile[0], Application.loadTile(tile[1]));
+				}
+			});
+		}
+
+		//Load all 7seg assets from the assets folder (sadly i is not dynamic as I didn't know how to read a dir effectively)
+		for (int i = 0; i <= 9; i++) {
+			final int thisAssetIndex = i;
+
+			this.c.dispatchWork(new Runnable() {
+				@Override
+				public void run() {
+					AssetRegistry.registerTile("7seg." + thisAssetIndex, Application.loadTile("assets/7seg/" + thisAssetIndex + "_small.png"));
+				}
+			});
+		}
 
 		this.c.startWorkStack();
 	}
