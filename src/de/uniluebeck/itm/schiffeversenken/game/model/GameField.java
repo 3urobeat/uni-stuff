@@ -68,11 +68,26 @@ public final class GameField {
 	 * @param shipToPlace The ship instance to place
 	 */
 	public void placeShip(int posX, int posY, int length, boolean up, Ship shipToPlace) {
-		/*
-		 * Nach korrekter Implementation sollten sich die Schiffe korrekt vertikal 
-		 * und horizontal mit der richtigen Laenge platzieren lassen. Sie werden aber 
-		 * noch aus falschen Tiles zusammengesetzt.
-		 */
+
+		//Iterate over all fields this ship should take up
+		for (int i = 0; i <= length; i++) {
+			FieldTile thisField;
+
+			//Get direction the ship should be placed in and either claim new fields in y or x direction
+			if (up) {
+				thisField = getTileAt(posX, posY + i);
+			} else {
+				thisField = getTileAt(posX + i, posY);
+			}
+
+			//Set state of this tile and add ship instance to field
+			thisField.setCorrespondingShip(shipToPlace);
+			thisField.setTilestate(FieldTileState.STATE_SHIP);
+
+			//Add ship to list containing all placed ships
+			ships.add(shipToPlace);
+		}
+
 	}
 
 	/**
