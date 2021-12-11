@@ -6,7 +6,7 @@ import de.uniluebeck.itm.schiffeversenken.engine.*;
  * This scene displays a loading screen while doing shady loading business.
  * After bing done doing so it switches to the main menu scene.
  * 
- * @author leondietrich
+ * @author leondietrich, modified by T. Goritz, L. Janßen
  *
  */
 public class LoadingScene extends Scene {
