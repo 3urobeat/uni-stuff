@@ -88,8 +88,8 @@ public class MatrixTest {
      * Set all values of row 0 to the value 0
      */
     public void setRowZeroToZero() {
-        for (int y = 0; y < cols; y++) {
-            field[0][y] = 0;
+        for (int x = 0; x < rows; x++) {
+            field[x][0] = 0;
         }
     }
 }

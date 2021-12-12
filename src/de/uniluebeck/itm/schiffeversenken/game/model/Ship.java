@@ -43,7 +43,7 @@ public class Ship {
 	 * @return boolean
 	 */
 	public boolean isUp() {
-		return orientation;
+		return this.orientation;
 	}
 
 }

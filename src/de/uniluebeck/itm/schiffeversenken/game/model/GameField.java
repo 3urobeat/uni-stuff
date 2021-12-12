@@ -25,7 +25,7 @@ public final class GameField {
 	 * @param size The size of the new game field to use.
 	 */
 	public GameField(Vec2 size) {
-		this.size = new Vec2(size.getX(), size.getY()); //set size to method parameter value
+		this.size = size; //set size to method parameter value
 		this.field = new FieldTile[size.getX()][size.getY()]; //create new field with size
 
 		//iterate over columns and rows
