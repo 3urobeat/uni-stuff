@@ -70,7 +70,7 @@ public final class GameField {
 	public void placeShip(int posX, int posY, int length, boolean up, Ship shipToPlace) {
 
 		//Iterate over all fields this ship should take up
-		for (int i = 0; i <= length; i++) {
+		for (int i = 0; i < length; i++) {
 			FieldTile thisTile;
 
 			//Get direction the ship should be placed in and either claim new fields in y or x direction
