@@ -103,19 +103,19 @@ public class GameFieldRenderer {
         boolean left  = false;
         boolean right = false;
 
-        Ship ship = this.field.getTileAt(x, y).getCorrespondingShip(); //get the corresponding ship for this tile
+        Ship ship = field.getTileAt(x, y).getCorrespondingShip(); //get the corresponding ship for this tile
 
         //Above - Check if tile is out of bounds and then if the ship instances match
-        if (y - 1 >= 0 && this.field.getTileAt(x, y - 1).getCorrespondingShip() == ship) above = true;
+        if (y - 1 >= 0 && field.getTileAt(x, y - 1).getCorrespondingShip() == ship) above = true;
 
         //Below
-        if (this.field.getSize().getY() > y + 1 && this.field.getTileAt(x, y + 1).getCorrespondingShip() == ship) below = true;
+        if (field.getSize().getY() > y + 1 && field.getTileAt(x, y + 1).getCorrespondingShip() == ship) below = true;
 
         //Left
-        if (x - 1 >= 0 && this.field.getTileAt(x - 1, y).getCorrespondingShip() == ship) left = true;
+        if (x - 1 >= 0 && field.getTileAt(x - 1, y).getCorrespondingShip() == ship) left = true;
 
         //Right
-        if (this.field.getSize().getX() > x + 1 && this.field.getTileAt(x + 1, y).getCorrespondingShip() == ship) right = true;
+        if (field.getSize().getX() > x + 1 && field.getTileAt(x + 1, y).getCorrespondingShip() == ship) right = true;
 
 
         //Return correct texture for each case
