@@ -61,17 +61,39 @@ public class LoadingScene extends Scene {
 				{"arrow.down", "assets/32x32/Tile_arrow_down_32x32_uint8_rgba.png"}};
 
 		//Load all existing tiles from the array above
-		for (String[] tile : tiles) {
+
+		/*
+			If I understand the task ("Verwenden Sie dispatchWork() dabei für jede zu ladende Tiledatei") correctly then the disabled code blocks are how it should be done.
+
+			The only problem is that the program tends to get stuck at "Loading data" in 6/10 tries and sometimes (probably if it is in the mood for it) throws
+			an "NoSuchElementException" when trying to remove an entry from the dispatched work queue in the thread controller (Controller.java:100).
+
+			I sadly have no idea how to "fix" this (I don't even know if this is an issue or if I'm solely to blame for this behaviour) so I put the whole
+			loading process in one single dispatchWork() call so that it at least works for now.
+
+			Please let me know what's happening if you are reading this. Thanks!
+		 */
+
+		/*for (String[] tile : tiles) {
 			this.c.dispatchWork(new Runnable() {
 				@Override
 				public void run() {
 					AssetRegistry.registerTile(tile[0], Application.loadTile(tile[1]));
 				}
 			});
-		}
+		}*/
+
+		this.c.dispatchWork(new Runnable() {
+			@Override
+			public void run() {
+				for (String[] tile : tiles) { //iterate over all tiles with a for each loop
+					AssetRegistry.registerTile(tile[0], Application.loadTile(tile[1]));
+				}
+			}
+		});
 
 		//Load all 7seg assets from the assets folder (sadly i is not dynamic as I didn't know how to read a dir effectively)
-		for (int i = 0; i <= 9; i++) {
+		/*for (int i = 0; i <= 9; i++) {
 			final int thisAssetIndex = i;
 
 			this.c.dispatchWork(new Runnable() {
@@ -80,7 +102,16 @@ public class LoadingScene extends Scene {
 					AssetRegistry.registerTile("7seg." + thisAssetIndex, Application.loadTile("assets/7seg/" + thisAssetIndex + "_small.png"));
 				}
 			});
-		}
+		}*/
+
+		this.c.dispatchWork(new Runnable() {
+			@Override
+			public void run() {
+				for (int i = 0; i <= 9; i++) {
+					AssetRegistry.registerTile("7seg." + i, Application.loadTile("assets/7seg/" + i + "_small.png"));
+				}
+			}
+		});
 
 		this.c.startWorkStack();
 	}
