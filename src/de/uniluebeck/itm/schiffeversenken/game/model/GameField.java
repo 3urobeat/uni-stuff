@@ -71,18 +71,22 @@ public final class GameField {
 
 		//Iterate over all fields this ship should take up
 		for (int i = 0; i <= length; i++) {
-			FieldTile thisField;
+			FieldTile thisTile;
 
 			//Get direction the ship should be placed in and either claim new fields in y or x direction
 			if (up) {
-				thisField = getTileAt(posX, posY + i);
+				if (getSize().getY() <= posY + i) return; //Check for OOB (out of bounds)
+
+				thisTile = getTileAt(posX, posY + i);
 			} else {
-				thisField = getTileAt(posX + i, posY);
+				if (getSize().getX() <= posX + i) return;
+
+				thisTile = getTileAt(posX + i, posY);
 			}
 
 			//Set state of this tile and add ship instance to field
-			thisField.setCorrespondingShip(shipToPlace);
-			thisField.setTilestate(FieldTileState.STATE_SHIP);
+			thisTile.setCorrespondingShip(shipToPlace);
+			thisTile.setTilestate(FieldTileState.STATE_SHIP);
 
 			//Add ship to list containing all placed ships
 			ships.add(shipToPlace);
