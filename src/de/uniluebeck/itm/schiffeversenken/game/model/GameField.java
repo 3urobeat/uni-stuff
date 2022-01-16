@@ -75,12 +75,8 @@ public final class GameField {
 
 			//Get direction the ship should be placed in and either claim new fields in y or x direction
 			if (up) {
-				if (getSize().getY() <= posY + i) return; //Check for OOB (out of bounds)
-
 				thisTile = getTileAt(posX, posY + i);
 			} else {
-				if (getSize().getX() <= posX + i) return;
-
 				thisTile = getTileAt(posX + i, posY);
 			}
 
