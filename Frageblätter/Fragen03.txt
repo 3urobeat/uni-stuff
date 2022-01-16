@@ -5,28 +5,44 @@ Fragen zu 3.1:
 2. Warum kann ich in der erbenden Klasse nicht direkt mit der Variablen field arbeiten?
 3. Was bedeutet das Überschreiben einer Methode?
 
+1. Es muss der erhaltene Parameter an den originalen Konstruktor mit super() weitergegeben werden
+2. Es muss erst ein Objekt im originalen Konstruktor erstellt werden, sowie andere Zuweisungen gemacht werden
+3. Das Verhalten der Methode wird abgeändert und überschrieben, der Methodenkopf (Parameter, Rückgabewert...) bleiben jedoch gleich
 
 Fragen zu 3.2:
 1. Was berechnet die Anweisung
       Vec2 positionOnOpponentsField = mousePosition.add(model.getOpponentsFieldPosition().multiply(-1));
+
+Es wird zu dem Vektor mousePosition ein weiterer Vektor mit add() hinzuaddiert, in diesem Fall die Position des gegnerischen Feldes, mit dem Skalar -1 multipliziert.
+Dadurch ergibt sich die Position, wo die Maus sich auf dem gegnerischen Feld gespiegelt befinden würde.
+
 2. Skizze des Feldes mit positionOnOpponentsField und res
 
+Es wird einfach die Koordinate auf dem anderen Feld ausgegeben, ich weiß leider nicht was ich dazu hier skizzieren soll.
 
 3. Wie werden aus positionOnOpponentsField die Feldkoordinaten berechnet?
 
+Beide Koordinaten werden durch res geteilt.
 
 4. Warum ist die Abfrage
        if (!fieldTile.wasAlreadyBombarded()) { ...
    notwendig? Gibt es in der Klasse FieldTile ein Attribut alreadyBombarded oder was macht die Methode?
 
+...damit für einen Treffer nicht doppelt Punkte vergeben werden können.
+Ja, FieldTile.java hat eine Methode wasAlreadyBombarded(), die checkt ob der Status des Feldes schon STATE_SHIP_HIT hat und dann true zurückgibt.
 
 5. Woraus ersieht man, dass die Spieler nach einem Treffer erneut drankommen, also kein Wechsel erfolgt?
 
+Bei keinem Treffer wird model.setRoundChangingFlag(true) gecalled, wodurch ein Spielerwechsel initiert wird. Das passiert bei einem Treffer nicht.
 
 6. In welcher Klasse befindet sich die Methode, die die Kopie der Schiffsliste liefert? Wie können Sie
    aus der Klasse GameController darauf zugreifen?
 
+Die Methode befindet sich in GameField.java.
+Darauf kann zugegriffen werden, indem über model das GameField Object des Spielers mit getHumanPlayerField() angefragt wird.
 
 7. Warum macht es Sinn, bei 2dii) eine Hilfsmethode anzulegen?
 
-
+Da sozusagen der gleiche Code in beiden for loops benötigt wird, kann man lieber eine Hilfsmethode schreiben, die dann zweimal aufgerufen wird,
+als dass man den Code zweimal kopiert. Dies führt zu schönerem Code und es macht es einfacher Probleme zu beheben, da nur einmal in der
+Hilfsmethode der Code editiert werden muss.

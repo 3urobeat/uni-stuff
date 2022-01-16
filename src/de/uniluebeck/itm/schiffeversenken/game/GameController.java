@@ -32,8 +32,7 @@ public class GameController extends Controller<GameModel> {
                 && positionOnOpponentsField.getX() < opponentsFieldDimensions.getX()
                 && positionOnOpponentsField.getY() < opponentsFieldDimensions.getY()) {
             final int res = Constants.TILE_SIZE;
-            
-            // TODO implement a way to get the field coordinates  
+
             final int tileX = positionOnOpponentsField.getX() / res;
             final int tileY = positionOnOpponentsField.getY() / res;
             Application.log("Bombarding position " + tileX + ", " + tileY);
