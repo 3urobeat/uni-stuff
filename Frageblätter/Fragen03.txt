@@ -1,0 +1,32 @@
+                                   Fragen zum Aufgabenblatt 03
+
+Fragen zu 3.1:
+1. Was muss beim Konstruktor der erbenden Klasse bzgl. der Parameterübergabe beachtet werden?
+2. Warum kann ich in der erbenden Klasse nicht direkt mit der Variablen field arbeiten?
+3. Was bedeutet das Überschreiben einer Methode?
+
+
+Fragen zu 3.2:
+1. Was berechnet die Anweisung
+      Vec2 positionOnOpponentsField = mousePosition.add(model.getOpponentsFieldPosition().multiply(-1));
+2. Skizze des Feldes mit positionOnOpponentsField und res
+
+
+3. Wie werden aus positionOnOpponentsField die Feldkoordinaten berechnet?
+
+
+4. Warum ist die Abfrage
+       if (!fieldTile.wasAlreadyBombarded()) { ...
+   notwendig? Gibt es in der Klasse FieldTile ein Attribut alreadyBombarded oder was macht die Methode?
+
+
+5. Woraus ersieht man, dass die Spieler nach einem Treffer erneut drankommen, also kein Wechsel erfolgt?
+
+
+6. In welcher Klasse befindet sich die Methode, die die Kopie der Schiffsliste liefert? Wie können Sie
+   aus der Klasse GameController darauf zugreifen?
+
+
+7. Warum macht es Sinn, bei 2dii) eine Hilfsmethode anzulegen?
+
+
