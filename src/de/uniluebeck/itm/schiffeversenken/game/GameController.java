@@ -8,6 +8,7 @@ import de.uniluebeck.itm.schiffeversenken.game.model.FieldTile;
 import de.uniluebeck.itm.schiffeversenken.game.model.GameModel;
 import de.uniluebeck.itm.schiffeversenken.game.model.Ship;
 
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GameController extends Controller<GameModel> {
@@ -29,16 +30,21 @@ public class GameController extends Controller<GameModel> {
             final int res = Constants.TILE_SIZE;
             
             // TODO implement a way to get the field coordinates  
-            final int tileX = 0;
-            final int tileY = 0;
+            final int tileX = positionOnOpponentsField.getX() / res;
+            final int tileY = positionOnOpponentsField.getY() / res;
             Application.log("Bombarding position " + tileX + ", " + tileY);
 
             final FieldTile fieldTile = model.getComputerPlayerField().getTileAt(tileX, tileY);
             if (!fieldTile.wasAlreadyBombarded()) {
-                if(fieldTile.bombard()) {
-                	
-                    // TODO: the player hit something: do something with this information
-                	
+                if (fieldTile.bombard()) {
+
+                    model.addPlayerPoints(Constants.POINTS_FOR_HIT); //add points if player hit something
+
+                    final Ship thisShip = model.getAgent().getLastAttackedTile().getCorrespondingShip();
+                    if (thisShip != null && thisShip.isSunken()) model.addPlayerPoints(Constants.POINTS_FOR_SHIP_SUNK); //add additional points if the ship is now sunken
+
+                    handlePossibleGameEnd();
+
                 } else {
                     model.setRoundChangingFlag(true);
                     this.dispatchWork(new Runnable() {
@@ -52,22 +58,46 @@ public class GameController extends Controller<GameModel> {
 
                         private void rewardAgentForDestroyingPlayer() {
                             model.addAiPoints(Constants.POINTS_FOR_HIT);
+
                             final Ship s = model.getAgent().getLastAttackedTile().getCorrespondingShip();
-                            if(s != null && s.isSunken()) {
-                            	
-                                // TODO perform the same checks for the computer player.
-                            }
+                            if (s != null && s.isSunken()) model.addAiPoints(Constants.POINTS_FOR_SHIP_SUNK); //add additional points if the ship is now sunken
+
                         }
 
                     });
                     this.startWorkStack();
+
+                    handlePossibleGameEnd();
                 }
             }
         }
     }
 
+    /**
+     * Helper function to determine if all ships are sunken
+     * @param ships Array of all ships to check
+     * @return true if all ships are sunken, otherwise false
+     */
+    private boolean allShipsSunken(Ship[] ships) {
+        boolean result = true;
+
+        //iterate over all ships and set result to false if at least one ship is not sunken yet
+        for (Ship e : ships) {
+            if (!e.isSunken()) result = false;
+        }
+
+        return result;
+    }
+
+    /**
+     * Check if the game has ended
+     */
     private void handlePossibleGameEnd() {
-        // TODO check if the game ended
+        final GameModel model = this.getModelInstance();
+
+        if (allShipsSunken(model.getHumanPlayerField().getCopyOfShipListAsArray()) && allShipsSunken(model.getComputerPlayerField().getCopyOfShipListAsArray())) {
+            endGame(allShipsSunken(model.getComputerPlayerField().getCopyOfShipListAsArray())); //player has won if all ships on computer's gamefield are sunken
+        }
     }
 
     /**
