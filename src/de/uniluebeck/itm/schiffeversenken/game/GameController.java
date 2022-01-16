@@ -11,6 +11,10 @@ import de.uniluebeck.itm.schiffeversenken.game.model.Ship;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Handle UI interactions
+ * @author modified by T. Goritz, L. Janßen
+ */
 public class GameController extends Controller<GameModel> {
 
     public GameController(GameModel m) {

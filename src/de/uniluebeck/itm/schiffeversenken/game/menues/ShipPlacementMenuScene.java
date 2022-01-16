@@ -7,7 +7,7 @@ import de.uniluebeck.itm.schiffeversenken.game.model.*;
 
 /**
  * This class enables the player to place ships on the field based on the provided ruleset.
- * @author leondietrich
+ * @author leondietrich, modified by T. Goritz, L. Janßen
  *
  */
 public class ShipPlacementMenuScene extends Scene {

@@ -5,6 +5,10 @@ import de.uniluebeck.itm.schiffeversenken.engine.Vec2;
 import de.uniluebeck.itm.schiffeversenken.engine.View;
 import de.uniluebeck.itm.schiffeversenken.game.model.GameModel;
 
+/**
+ * Rendering stuff
+ * @author modified by T. Goritz, L. Janßen
+ */
 public class GameView extends View<GameModel> {
 
     private final GameFieldRenderer fieldRenderer;

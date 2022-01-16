@@ -4,6 +4,10 @@ import de.uniluebeck.itm.schiffeversenken.engine.AssetRegistry;
 import de.uniluebeck.itm.schiffeversenken.engine.Tile;
 import de.uniluebeck.itm.schiffeversenken.game.model.GameField;
 
+/**
+ * Handle hidden hits on enemies game field
+ * @author T. Goritz, L. Janßen
+ */
 public class HitMissRenderer extends GameFieldRenderer {
 
     public HitMissRenderer(GameField field) {
