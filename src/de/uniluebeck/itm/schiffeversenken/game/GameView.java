@@ -8,12 +8,12 @@ import de.uniluebeck.itm.schiffeversenken.game.model.GameModel;
 public class GameView extends View<GameModel> {
 
     private final GameFieldRenderer fieldRenderer;
-    private final GameFieldRenderer opponentFieldRenderer;
+    private final HitMissRenderer opponentFieldRenderer;
 
     public GameView(GameModel m) {
         super(m);
         this.fieldRenderer = new GameFieldRenderer(this.getModelInstance().getHumanPlayerField());
-        this.opponentFieldRenderer = new GameFieldRenderer(this.getModelInstance().getComputerPlayerField());
+        this.opponentFieldRenderer = new HitMissRenderer(this.getModelInstance().getComputerPlayerField());
     }
 
     @Override
