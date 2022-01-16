@@ -49,7 +49,7 @@ public class GameFieldRenderer {
         //Draw borders between each row/column of fields
         c.setColor(0, 0, 0); //set color of lines to draw
 
-        for (int posX = x; posX < width - tileSize; posX += tileSize) { //iterate over x axis
+        for (int posX = x; posX < width + x; posX += tileSize) { //iterate over x axis
             c.drawLine(new Vec2(posX + tileSize, y), new Vec2(posX + tileSize, height + y)); //draw line for y axis on this x coordinate
         }
 
