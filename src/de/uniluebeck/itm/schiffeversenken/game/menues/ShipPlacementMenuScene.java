@@ -270,6 +270,29 @@ public class ShipPlacementMenuScene extends Scene {
 		if (key == 'R' || key == 'r') {
 			this.currentOrientationIsUp = !this.currentOrientationIsUp;
 		}
+
+		//Helper function to automatically place all ships if F is pressed to make debugging easier
+		if(key == 'F'|| key == 'f') {
+			final int[] amountOfShips = new int[]{
+					this.ruleset.getNumberOf1Ships(),
+					this.ruleset.getNumberOf2Ships(),
+					this.ruleset.getNumberOf3Ships(),
+					this.ruleset.getNumberOf4Ships(),
+					this.ruleset.getNumberOf5Ships()};
+			int buffer = 0;
+
+			for (int i = 0; i < amountOfShips.length; i++) {
+				for (int y = 0; y < amountOfShips[i]; y++) {
+					final Ship shipToPlace = new Ship(i + 1, true);
+
+					this.field.placeShip(buffer, 1, i + 1, true, shipToPlace);
+					Application.log("ship: " + shipToPlace + " pplaced menge der schiffe: " + amountOfShips[i]);
+					buffer++;
+				}
+			}
+
+			startGame();
+		}
 	}
 
 }
