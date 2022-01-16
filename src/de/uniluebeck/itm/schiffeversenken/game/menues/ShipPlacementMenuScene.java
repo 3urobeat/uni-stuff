@@ -271,7 +271,7 @@ public class ShipPlacementMenuScene extends Scene {
 			this.currentOrientationIsUp = !this.currentOrientationIsUp;
 		}
 
-		//Helper function to automatically place all ships if F is pressed to make debugging easier
+		//Helper function to automatically place all ships if F is pressed to make debugging easier (Co-Author: Jean-Luc Dittler)
 		if(key == 'F'|| key == 'f') {
 			final int[] amountOfShips = new int[]{
 					this.ruleset.getNumberOf1Ships(),
