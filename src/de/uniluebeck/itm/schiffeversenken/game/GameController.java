@@ -43,10 +43,10 @@ public class GameController extends Controller<GameModel> {
 
                     model.addPlayerPoints(Constants.POINTS_FOR_HIT); //add points if player hit something
 
-                    final Ship thisShip = model.getAgent().getLastAttackedTile().getCorrespondingShip();
+                    final Ship thisShip = fieldTile.getCorrespondingShip();
                     if (thisShip != null && thisShip.isSunken()) model.addPlayerPoints(Constants.POINTS_FOR_SHIP_SUNK); //add additional points if the ship is now sunken
 
-                    handlePossibleGameEnd();
+                    handlePossibleGameEnd(); //check if this hit made the player win
 
                 } else {
                     model.setRoundChangingFlag(true);
@@ -65,12 +65,11 @@ public class GameController extends Controller<GameModel> {
                             final Ship s = model.getAgent().getLastAttackedTile().getCorrespondingShip();
                             if (s != null && s.isSunken()) model.addAiPoints(Constants.POINTS_FOR_SHIP_SUNK); //add additional points if the ship is now sunken
 
+                            handlePossibleGameEnd(); //check if this hit made the AI win
                         }
 
                     });
                     this.startWorkStack();
-
-                    handlePossibleGameEnd();
                 }
             }
         }
@@ -89,7 +88,7 @@ public class GameController extends Controller<GameModel> {
             if (!e.isSunken()) result = false;
         }
 
-        return result;
+        return result; //return result
     }
 
     /**
@@ -98,7 +97,8 @@ public class GameController extends Controller<GameModel> {
     private void handlePossibleGameEnd() {
         final GameModel model = this.getModelInstance();
 
-        if (allShipsSunken(model.getHumanPlayerField().getCopyOfShipListAsArray()) && allShipsSunken(model.getComputerPlayerField().getCopyOfShipListAsArray())) {
+        //check if all ships are sunken
+        if (allShipsSunken(model.getHumanPlayerField().getCopyOfShipListAsArray()) || allShipsSunken(model.getComputerPlayerField().getCopyOfShipListAsArray())) {
             endGame(allShipsSunken(model.getComputerPlayerField().getCopyOfShipListAsArray())); //player has won if all ships on computer's gamefield are sunken
         }
     }
