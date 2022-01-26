@@ -1,0 +1,32 @@
+                                   Fragen zum Aufgabenblatt 04
+
+Fragen zu 4.1:
+
+1. Skizze anfertigen zum Lösen der Methode renderMouseOver()
+   mit den verschiedenen Koordinatenangaben, die benötigt werden.
+
+2. Wie berechnet man Spalte/Zeile des Kästchens, das überdeckt werden soll?
+
+3. Wie erhält man daraus die Koordinaten für das transparente Feld (Kästchen)?
+   Nach der Berechnung am besten eine Kontrollausgabe auf die Konsole ergänzen.
+
+4. Welche Parameter benötigen c.setColor() und c.fillRect() ?
+
+5. Was müssen Sie berücksichtigen beim Zeichnen des Pfeiles?
+
+6. Wie ermitteln Sie die notwendigen Parameter für den Aufruf von renderMouseOver() in der Klasse GameView?
+
+7. Wie gehen Sie vor, um das Pfeilbild anzuzeigen?
+
+
+Fragen zu 4.3:
+
+1. Wie können Sie die Stellenanzahl der übergebenen Zahl bestimmen?
+
+2. In welcher Abfolge lassen Sie die Ziffernbilder anzeigen?
+
+3. Warum sehen Sie ev. die Ziffernbilder nicht, obwohl diese korrekt platziert wurden?
+
+4. Wie lassen Sie die Zahlen mittig auf der Kachel anzeigen?
+
+
