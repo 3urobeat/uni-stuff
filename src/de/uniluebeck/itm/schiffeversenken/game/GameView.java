@@ -1,5 +1,6 @@
 package de.uniluebeck.itm.schiffeversenken.game;
 
+import de.uniluebeck.itm.schiffeversenken.engine.AssetRegistry;
 import de.uniluebeck.itm.schiffeversenken.engine.Canvas;
 import de.uniluebeck.itm.schiffeversenken.engine.Vec2;
 import de.uniluebeck.itm.schiffeversenken.engine.View;
@@ -62,9 +63,29 @@ public class GameView extends View<GameModel> {
         }
     }
 
+    /**
+     * Draws a 7 segment display number at a specified location
+     * @param c The canvas to render on
+     * @param x x coordinate of the location to draw at
+     * @param y y coordinate of the location to draw at
+     * @param number The number to draw
+     */
     private void draw7segNumberAt(Canvas c, int x, int y, int number) {
-        c.drawString(x, y, Integer.toString(number));
-        // TODO implement a real (well sort of, it's still inside a computer) 7 segment display
+        int currentPosX = x;
+        int width       = 26; //width and height of the grey rectangle appearing behind the 7seg digits
+        int height      = 44;
+
+        //Convert number to String, split at each digit and iterate over each digit
+        String[] sStr = Integer.toString(number).split("");
+
+        for (int i = sStr.length - 1; i >= 0; i--) { //iterate starting from the back so that the number doesn't appear "mirrored"
+            c.setColor(1, 1, 1, 0.5); //create some sort of grey
+            c.fillRect(currentPosX, y, width, height); //render background
+
+            AssetRegistry.getTile("7seg." + sStr[i]).renderAt(c, new Vec2(currentPosX + 3, y + 3)); //+3 to appear in the middle of the grey rectangle
+
+            currentPosX -= width; //subtract width so that the next number appears on the left of this digit
+        }
     }
 
     @Override
