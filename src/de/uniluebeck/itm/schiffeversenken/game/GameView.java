@@ -36,6 +36,9 @@ public class GameView extends View<GameModel> {
         model.updateOpponentsFieldOnScreenData(new Vec2(opponentsFieldX, offsetY),
                 new Vec2(fieldsWidth, fieldsHeight));
 
+        //Render tile overlay the mouse is hovering above
+        opponentFieldRenderer.renderMouseOver(c, mouseLocation.getX(), mouseLocation.getY(), opponentsFieldX, offsetY);
+
         c.setColor(0.7, 0.7, 0.7);
         c.drawRoundRect(frameWidth - 280 - offsetX, offsetY, 280, frameHeight - offsetY - 100, 5, 5);
 

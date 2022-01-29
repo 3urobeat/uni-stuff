@@ -144,4 +144,33 @@ public class GameFieldRenderer {
         return this.field;
     }
 
+
+    /**
+     * Renders an aiming help over the field the mouse is pointing to
+     * @param c The canvas to render on.
+     * @param x x coordinate of the mouse pointer
+     * @param y y coordinate of the mouse pointer
+     * @param fieldX x coordinate of the opponents field
+     * @param fieldY y coordinate of the opponents field
+     */
+    protected void renderMouseOver(Canvas c, int x, int y, int fieldX, int fieldY) {
+        //calculate width and height of the field
+        int width = getField().getSize().getX() * Constants.TILE_SIZE;
+        int height = getField().getSize().getY() * Constants.TILE_SIZE;
+
+        //Check if mouse is hovering above the opponent's field and abort if not the case
+        if (!(x >= fieldX && x < fieldX + width) || !(y >= fieldY && y < fieldY + height)) return;
+
+        //Get tile the mouse is hovering above
+        int tileX = ((x - fieldX) / Constants.TILE_SIZE) * Constants.TILE_SIZE + fieldX;
+        int tileY = ((y - fieldY) / Constants.TILE_SIZE) * Constants.TILE_SIZE + fieldY;
+
+        //Fill tile with semi transparent color
+        c.setColor(0, 0, 0, 0.3);
+        c.fillRect(tileX, tileY, Constants.TILE_SIZE, Constants.TILE_SIZE);
+
+        //Render arrow down texture
+        AssetRegistry.getTile("arrow.down").renderAt(c, new Vec2(tileX + 3, tileY - 12));
+    }
+
 }
