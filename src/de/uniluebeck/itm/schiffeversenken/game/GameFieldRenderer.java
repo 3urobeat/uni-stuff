@@ -169,8 +169,12 @@ public class GameFieldRenderer {
         c.setColor(0, 0, 0, 0.3);
         c.fillRect(tileX, tileY, Constants.TILE_SIZE, Constants.TILE_SIZE);
 
-        //Render arrow down texture
-        AssetRegistry.getTile("arrow.down").renderAt(c, new Vec2(tileX + 3, tileY - 12));
+        //Render hovering arrow down texture
+        int    speedConst      = 175;
+        double animationOffset = Math.sin(System.currentTimeMillis() / speedConst) * Math.sqrt(Constants.TILE_SIZE);
+
+        Vec2 renderPos = new Vec2(tileX, tileY).add(new Vec2(1, -1).multiply(Constants.TILE_SIZE / 2)).add(new Vec2(-1, 1).multiply((int) animationOffset)); //formula found on the Aufgabenblatt at task 4.2
+        AssetRegistry.getTile("arrow.down").renderAt(c, renderPos);
     }
 
 }
