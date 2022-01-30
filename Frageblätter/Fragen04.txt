@@ -5,28 +5,79 @@ Fragen zu 4.1:
 1. Skizze anfertigen zum Lösen der Methode renderMouseOver()
    mit den verschiedenen Koordinatenangaben, die benötigt werden.
 
+- Höhe und Breite des Spielfeldes berechnen mit field size * tile size
+- Prüfen ob cursor noch zwischen 0,0 und width,height ist
+- tile ermitteln über dem der Cursor schwebt
+- Farbe zu semi transparent setzen mit setColor(0, 0, 0, 0.3)
+- Viereck mit den TILE_SIZE Dimensionen an den 0,0 Koordinaten des tiles zeichnen
+- animationOffset und renderPos mit der im Aufgabenblatt vorgegebenen Funktion berechnen
+    - Struktur der renderPos Formel muss im Vergleich zum Aufgabenblatt leicht abgeändert werden
+- Textur "arrow.down" mit getTile() aus der AssetRegistry laden und mit renderAt() auf dem Canvas an renderPos zeichnen
+
+
 2. Wie berechnet man Spalte/Zeile des Kästchens, das überdeckt werden soll?
+
+X: (x - fieldX) / Constants.TILE_SIZE
+Y: (y - fieldY) / Constants.TILE_SIZE
+
 
 3. Wie erhält man daraus die Koordinaten für das transparente Feld (Kästchen)?
    Nach der Berechnung am besten eine Kontrollausgabe auf die Konsole ergänzen.
 
+Ergebnis von 2. * TILE_SIZE + fieldX
+                * TILE_SIZE + fieldY
+
+Kontrollausgabe:
+X: 2 -> 596
+Y: 3 -> 131
+
+
 4. Welche Parameter benötigen c.setColor() und c.fillRect() ?
+
+c.setColor(double r, double g, double b, double alpha);
+c.fillRect(int x, int y, int width, int height);
+
 
 5. Was müssen Sie berücksichtigen beim Zeichnen des Pfeiles?
 
+Wenn der Pfeil ohne die vorgegebene Animation gezeichnet werden soll, muss der Cursor leicht nach oben rechts verschoben werden, so ca. mit x+3 y-12.
+
+
 6. Wie ermitteln Sie die notwendigen Parameter für den Aufruf von renderMouseOver() in der Klasse GameView?
 
+Die geforderten Parameter stehen im Aufgabenblatt.
+Ein einfacher Blick auf andere verfügbare Parameter in der Klasse GameView oder ein ansehen des IntelliSense Fensters genügt um passende Parameter zu finden.
+
+Der Canvas c und Vec2 mouseLocation Parameter wird der überliegenden Methode render() übergeben, fieldX und fieldY geht z.B. aus dem renderGameField() call hervor.
+
+
 7. Wie gehen Sie vor, um das Pfeilbild anzuzeigen?
+
+Einfach die zugehörige Textur aus der AssetRegistry mit getTile("arrow.down") laden und mit renderAt() an der gewünschten Position auf dem Canvas zeichnen:
+AssetRegistry.getTile("arrow.down").renderAt(c, renderPos);
 
 
 Fragen zu 4.3:
 
 1. Wie können Sie die Stellenanzahl der übergebenen Zahl bestimmen?
 
+Integer zu String mit toString() konvertieren, und mit split("") nach jedem Zeichen splitten.
+Dann einfach vom String Array, welches von split() zurückgegeben wird, den length Parameter auslesen.
+
+
 2. In welcher Abfolge lassen Sie die Ziffernbilder anzeigen?
+
+Mit der letzten Stelle der Zahl anfangen, zeichnen, Position um Breite des Hintergrunds nach links verschieben und nächste Ziffer zeichnen.
+
 
 3. Warum sehen Sie ev. die Ziffernbilder nicht, obwohl diese korrekt platziert wurden?
 
+Weil kein grauer Hintergrund gezeichnet wurde und die schwarze Zahl auf schwarzem Hintergrund eher weniger lesbar ist.
+
+
 4. Wie lassen Sie die Zahlen mittig auf der Kachel anzeigen?
 
-
+Ausprobieren.
+Ich habe einfach die Ziffer Stück für Stück nach unten rechts verschoben, bis sie mittig aussah, was schon nach drei Versuchen der Fall war.
+x+3 und y+3 sehen sehr mittig und gut aus.
+Man könnte sicherlich auch irgendwie rechnerisch die perfekte Mitte ermitteln, ich habe es mir aber nicht unnötig kompliziert gemacht.
