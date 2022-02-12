@@ -1,0 +1,18 @@
+                                   Fragen zum Aufgabenblatt 05
+
+Fragen zu 5.1:
+
+1. Beschreiben Sie verbal die Idee für den Algorithmus, mit dem Sie den Abstand zwischen den Schiffen implementieren wollen.
+   Fertigen Sie dazu ev. eine Skizze an.
+2. Erklären Sie, wie Sie die erstellte Methode auf den Computerspieler übertragen können.
+   Sind Änderungen erforderlich? Wenn ja, welche sind dies im Detail?
+
+
+Fragen zu 5.2:
+
+1. Beschreiben Sie hier verbal die Vorgehensweise, wie ihre verbesserte Strategie für den Computerspieler aussehen soll.
+   Testen Sie aus, ob der Computerspieler damit häufiger gewinnt. Hatten Sie Erfolg?
+
+
+
+
