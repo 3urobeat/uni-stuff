@@ -7,6 +7,10 @@ import de.uniluebeck.itm.schiffeversenken.game.model.Ship;
 
 import java.util.Random;
 
+/**
+ * Abstract class for doing AI stuff
+ * @author modified by T. Goritz, L. Janßen
+ */
 public abstract class AIAgent {
 
     private final int hardness;
@@ -48,15 +52,17 @@ public abstract class AIAgent {
 
         final Random rnd = new Random(System.currentTimeMillis());
 
+        final boolean keepDistance = r.getKeepDistance();
+
         for (int shipsLenghtIndex = 0; shipsLenghtIndex < shipsToBePlaced.length; shipsLenghtIndex++) {
             for (int ship = 0; ship < shipsToBePlaced[shipsLenghtIndex]; ship++) {
                 while (!checkAndPlace(f, rnd.nextBoolean(), rnd.nextInt(width),
-                        rnd.nextInt(height), shipsLenghtIndex + 1, width, height));
+                        rnd.nextInt(height), shipsLenghtIndex + 1, width, height, keepDistance));
             }
         }
     }
 
-    private boolean checkAndPlace(GameField f, boolean up, int x, int y, int length, int width, int height) {
+    private boolean checkAndPlace(GameField f, boolean up, int x, int y, int length, int width, int height, boolean keepDistance) {
         if ((up && y + length > height) || (!up && x + length > width)) {
             return false;
         }
@@ -73,9 +79,62 @@ public abstract class AIAgent {
             }
         }
 
+        //Check for keepDistance
+        if (placeShipOnFieldKeepDistanceCheck(x, y, keepDistance, length, f, up)) return false; //don't place ship if distance was not kept
+
         final Ship shipToPlace = new Ship(length, up);
         f.placeShip(x, y, length, up, shipToPlace);
         return true;
+    }
+
+    /**
+     * Checks for invalid ship placement if keepDistance is true
+     * @param x The initial X coordinate of the ship
+     * @param y The initial Y coordinate of the ship
+     * @param keepDistance Result of r.getKeepDistance()
+     * @param length The length of the ship to place
+     * @param f The GameField
+     * @param up Rotation of the ship to place
+     * @return true if placement is illegal, false if ship can be placed
+     */
+    private boolean placeShipOnFieldKeepDistanceCheck(int x, int y, boolean keepDistance, int length, GameField f, boolean up) {
+        if (!keepDistance) return false; //stop execution if distance is irrelevant
+
+        //Check if the tiles besides the ship are occupied if keepDistance is true
+        for (int currentShipsX = x, currentShipsY = y, i = 0; i < length; i++) {
+            //above  (don't use ++ and -- here so that we don't modify the vars in the loop header)
+            if (currentShipsY + 1 < f.getSize().getY()) {
+                final FieldTile t = f.getTileAt(currentShipsX, currentShipsY + 1);
+                if (t.getTilestate() != FieldTile.FieldTileState.STATE_WATER || t.getCorrespondingShip() != null) return true;
+            }
+
+            //right
+            if (currentShipsX + 1 < f.getSize().getX()) {
+                final FieldTile t = f.getTileAt(currentShipsX + 1, currentShipsY);
+                if (t.getTilestate() != FieldTile.FieldTileState.STATE_WATER || t.getCorrespondingShip() != null) return true;
+            }
+
+            //below
+            if (currentShipsY - 1 >= 0) {
+                final FieldTile t = f.getTileAt(currentShipsX, currentShipsY - 1);
+                if (t.getTilestate() != FieldTile.FieldTileState.STATE_WATER || t.getCorrespondingShip() != null) return true;
+            }
+
+            //left
+            if (currentShipsX - 1 >= 0) {
+                final FieldTile t = f.getTileAt(currentShipsX - 1, currentShipsY);
+                if (t.getTilestate() != FieldTile.FieldTileState.STATE_WATER || t.getCorrespondingShip() != null) return true;
+            }
+
+
+            if (up) {
+                currentShipsY++;
+            } else {
+                currentShipsX++;
+            }
+        }
+
+        return false;
     }
 
     /**

@@ -226,11 +226,60 @@ public class ShipPlacementMenuScene extends Scene {
 			}
 		}
 
+		//Check for keepDistance
+		if (placeShipOnFieldKeepDistanceCheck(x, y)) return; //don't place ship if distance was not kept
+
 		// Then we need to create a ship and place it
 		final Ship shipToPlace = new Ship(this.currentSelectedShipsLength, this.currentOrientationIsUp);
 		this.field.placeShip(x, y, this.currentSelectedShipsLength, this.currentOrientationIsUp, shipToPlace);
 		this.placedShips[this.currentSelectedShipsLength - 1]++;
 		this.currentSelectedShipsLength = 0;
+	}
+
+	/**
+	 * Checks for invalid ship placement if keepDistance is true
+	 * @param x The initial X coordinate of the ship
+	 * @param y The initial Y coordinate of the ship
+	 * @return true if placement is illegal, false if ship can be placed
+	 */
+	private boolean placeShipOnFieldKeepDistanceCheck(int x, int y) {
+		if (!this.ruleset.getKeepDistance()) return false; //stop execution if distance is irrelevant
+
+		//Check if the tiles besides the ship are occupied if keepDistance is true
+		for (int currentShipsX = x, currentShipsY = y, i = 0; i < this.currentSelectedShipsLength; i++) {
+			//above  (don't use ++ and -- here so that we don't modify the vars in the loop header)
+			if (currentShipsY + 1 < this.field.getSize().getY()) {
+				final FieldTile t = this.field.getTileAt(currentShipsX, currentShipsY + 1);
+				if (t.getTilestate() != FieldTile.FieldTileState.STATE_WATER || t.getCorrespondingShip() != null) return true;
+			}
+
+			//right
+			if (currentShipsX + 1 < this.field.getSize().getX()) {
+				final FieldTile t = this.field.getTileAt(currentShipsX + 1, currentShipsY);
+				if (t.getTilestate() != FieldTile.FieldTileState.STATE_WATER || t.getCorrespondingShip() != null) return true;
+			}
+
+			//below
+			if (currentShipsY - 1 >= 0) {
+				final FieldTile t = this.field.getTileAt(currentShipsX, currentShipsY - 1);
+				if (t.getTilestate() != FieldTile.FieldTileState.STATE_WATER || t.getCorrespondingShip() != null) return true;
+			}
+
+			//left
+			if (currentShipsX - 1 >= 0) {
+				final FieldTile t = this.field.getTileAt(currentShipsX - 1, currentShipsY);
+				if (t.getTilestate() != FieldTile.FieldTileState.STATE_WATER || t.getCorrespondingShip() != null) return true;
+			}
+
+
+			if (this.currentOrientationIsUp) {
+				currentShipsY++;
+			} else {
+				currentShipsX++;
+			}
+		}
+
+		return false;
 	}
 
 	private void startGame() {
