@@ -299,7 +299,8 @@ public class ShipPlacementMenuScene extends Scene {
 						break;
 					case 1:
 					case 2:
-						throw new RuntimeException("Dieser Schwierigkeitsgrad wurde von dir noch nicht implementiert.");
+						ag = new BetterAIAgent(0);
+						break;
 				}
 				final GameField agentsField = new GameField(ruleset.getGameFieldSize());
 				ag.setup(ruleset, agentsField);
