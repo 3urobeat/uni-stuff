@@ -4,7 +4,7 @@ Project: python-calculator
 Created Date: 04.11.2022 13:23:24
 Author: 3urobeat
 
-Last Modified: 08.11.2022 15:124:31
+Last Modified: 08.11.2022 15:24:31
 Modified By: 3urobeat
 
 Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
