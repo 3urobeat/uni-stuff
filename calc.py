@@ -4,7 +4,7 @@ Project: python-calculator
 Created Date: 04.11.2022 13:23:24
 Author: 3urobeat
 
-Last Modified: 08.11.2022 14:48:51
+Last Modified: 08.11.2022 15:15:37
 Modified By: 3urobeat
 
 Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -16,10 +16,12 @@ Full license information available in the project LICENSE file.
 
 
 import sys
+import re
+import math
 
 # Map all words to actual numbers/operations to make replacing them easier
-wordMappings      = { "null": "0", "eins": "1", "zwei": "2", "drei": "3", "vier": "4", "fuenf": "5", "sechs": "6", "sieben": "7", "acht": "8", "neun": "9",
-                      "plus": "+", "minus": "-", "mal": "*", "durch": "/", "gleich": "=" }
+wordMappings = { "null": "0", "eins": "1", "zwei": "2", "drei": "3", "vier": "4", "fuenf": "5", "sechs": "6", "sieben": "7", "acht": "8", "neun": "9",
+                 "plus": "+", "minus": "-", "mal": "*", "durch": "/", "gleich": "=" }
 
 
 """ Get all lines from stdin """
@@ -47,4 +49,13 @@ def cleanInput(task):
             task = task.replace(char, "")
 
     return task
-  
+
+
+""" Call functions """
+taskList = readInput() # Get all cleaned up lines from input
+
+# Iterate over all tasks in taskList
+for e in taskList:
+    res  = math.trunc(eval(e)) # Calculate task and trunc result. Is just calling eval unsafe?
+
+    print(res) # Output result
