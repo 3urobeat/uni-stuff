@@ -4,7 +4,7 @@ Project: python-calculator
 Created Date: 04.11.2022 13:23:24
 Author: 3urobeat
 
-Last Modified: 08.11.2022 15:15:37
+Last Modified: 08.11.2022 15:124:31
 Modified By: 3urobeat
 
 Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -40,6 +40,7 @@ def readInput():
 
     return tasks
 
+
 """ Removes everything which is not an operator or NaN from the task """
 def cleanInput(task):
     task = task.replace("=", "").replace(" ", "").replace("\n", "") # Remove equals, all whitespaces and line break from task
@@ -56,6 +57,6 @@ taskList = readInput() # Get all cleaned up lines from input
 
 # Iterate over all tasks in taskList
 for e in taskList:
-    res  = math.trunc(eval(e)) # Calculate task and trunc result. Is just calling eval unsafe?
+    res = math.trunc(eval(e)) # Calculate task and trunc result. Is just calling eval unsafe? Yes, but no big concern in this application with a fixed dataset
 
     print(res) # Output result
