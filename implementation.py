@@ -23,42 +23,77 @@ class DataSet(dataset.DataSetInterface):
     def __init__(self, *args):
         super().__init__(*args)
 
+        self.items = {}
 
-    # Adds date with name, id and content
+    # Add date with name, id and content
     def __setitem__(self, name, id_content):
-        
+        self.items[name] = dataset.DataSetItem(name, id_content[0], id_content[1])
 
     # Add a DataSetItem
     def __iadd__(self, item):
-        
+        self.items[item.name] = item
+
+        return self # Important so that += works
     
-    # Deletes a date by name
+    # Delete an item by name
     def __delitem__(self, name):
-
+        self.items.pop(name)
     
-    # Checks if a date + name combo exists
+    # Check if a DataSetItem is in DataSet
     def __contains__(self, name):
+        return bool(self.items.get(name))
 
+    # Retrieve a date by name
+    def __getitem__(self, name):
+        return self.items.get(name)
 
-    # Retrieves a date by name
-    def __getitem(self, name):
-
-
-    # Returns dataset with content which both datasets have in common
+    # Return dataset with content which both datasets have in common
     def __and__(self, dataset):
+        newSet = DataSet() # Create new set
 
+        # Iterate over dataset and items and push every DataSet with matching 'name' values into newSet
+        for e in dataset:
+            for f in self.items.values():
+                if e.name == f.name:
+                    newSet += f # Use item from self for newSet
 
-    # Returns content of both datasets as one 
+        return newSet
+
+    # Return content of both datasets as one 
     def __or__(self, dataset):
+        newSet = DataSet() # Create new set
 
+        # Push all DataSetItems from self
+        for e in self.items.values():
+            newSet += e
 
-    # Iterates over everything inside this dataset based on iterate_sorted, iterate_reversed and iterate_key
+        # Push all DataSetItems from dataset, overwriting duplicates
+        for e in dataset:
+            newSet += e
+
+        return newSet
+
+    # Iterate over everything inside this dataset based on iterate_sorted, iterate_reversed and iterate_key
     def __iter__(self):
+        res = self.items # result dict to apply sort to if self.iterate_... is enabled
 
+        # Apply sorts if desired
+        if self.iterate_sorted:
+            if self.iterate_key == self.ITERATE_SORT_BY_ID: # Sort by ID
+                res = {key: val for val, key in sorted(self.items.items(), key = lambda e: e[1][0])} # e: Access ID
+            else: # Sort by name
+                res = {key: val for key, val in sorted(self.items.items(), key = lambda e: e[0])} # e: Access name
 
-    # Iterates like __iter__ but accepts a lambda function as filter
+        if self.iterate_reversed:
+            res = dict(reversed(list(res.items())))
+
+        # Return iterable
+        return iter(res.values())
+
+    # Iterate like __iter__ but accepts a lambda function as filter
     def filtered_iterate(self, filter):
+        print("test")
 
-
-    # Returns amount of entries in dataset
+    # Return amount of entries in dataset
     def __len__(self):
+        return len(self.items.keys())
