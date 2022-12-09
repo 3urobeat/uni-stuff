@@ -85,7 +85,7 @@ class DataSet(dataset.DataSetInterface):
         # Apply sorts if desired
         if self.iterate_sorted:
             if self.iterate_key == self.ITERATE_SORT_BY_ID: # Sort by ID
-                res = {key: val for val, key in sorted(self.items.items(), key = lambda e: e[1][0])} # e: Access ID
+                res = {key: val for key, val in sorted(self.items.items(), key = lambda e: e[1].id)} # e: Access ID
             else: # Sort by name
                 res = {key: val for key, val in sorted(self.items.items(), key = lambda e: e[0])} # e: Access name
 
