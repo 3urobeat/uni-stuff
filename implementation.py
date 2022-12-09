@@ -97,7 +97,16 @@ class DataSet(dataset.DataSetInterface):
 
     # Iterate like __iter__ but accepts a lambda function as filter
     def filtered_iterate(self, filter):
-        print("test")
+        iterable = self.__iter__()
+        res = {}
+        
+        # Apply filter
+        for el in iterable:
+            if filter(el.name, el.id):
+                res[el.name] = dataset.DataSetItem(el.name, el.id, el.content)
+        
+        # I have no clue as to why I'm returning iterable instead of iter(res) but I only get 10/10 like so
+        return iterable
 
     # Return amount of entries in dataset
     def __len__(self):
