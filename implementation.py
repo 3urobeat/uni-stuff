@@ -25,6 +25,11 @@ class DataSet(dataset.DataSetInterface):
 
         self.items = {}
 
+        # Directly add DataSetItems from args to items
+        for e in args:
+            for i in e:
+                self += i
+
     # Add date with name, id and content
     def __setitem__(self, name, id_content):
         self.items[name] = dataset.DataSetItem(name, id_content[0], id_content[1])
