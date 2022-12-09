@@ -120,4 +120,8 @@ for i, l in zip(d_union, [1, 2, 5, 6, 7, 8]):
 	if i.id != l:
 		code_fail()
 
+# Reverse engineered hidden test from Moodle VPL
+for el in d5.filtered_iterate(lambda n,i: i % 2 == 0):
+	print(el)
+
 code_pass()
