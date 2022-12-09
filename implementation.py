@@ -17,11 +17,11 @@ Alle drei Dateien liegen im gleichen Ordner.
 import dataset
 
 # Klasse: DataSet
-class DataSet(dataset.DataSetInterface()):
+class DataSet(dataset.DataSetInterface):
 
     # Provide constructor, take array of arguments as args
-    def __init__(self, args):
-        self.args = args;
+    def __init__(self, *args):
+        super().__init__(*args)
 
 
     # Adds date with name, id and content
