@@ -1,0 +1,47 @@
+                                   Fragen zum Aufgabenblatt 02
+
+Hinweise und Fragen zu Aufgabe 2.1:
+1) Lesen Sie in der HTML-Datei "Übersicht Szenen -- Verhalten beim Szenenwechsel":
+   -- Was bewirken attach() und detach()?
+
+   detach() wird unmittelbar vor dem Aufrufen einer neuen Szene, in der Alten, aufgerufen (solange eine vorherige Szene existiert) und dient sozusagen als "Event" für die alte
+   Szene, um zum Beispiel noch gewisse Daten abzuspeichern.
+
+   attach() kann genutzt werden um eine Szene, sofern sie schon vorher einmal verwendet wurde, wieder in ihren Ausgangszustand zu setzen,
+   ohne dass dafür ein neues Objekt erzeugt werden muss.
+
+
+2) Lesen Sie in der HTML-Datei den Abschnitt "Workdispatcher -- Wie man den Workdispatcher nutzt"
+   -- Warum wird der Workdispatcher in 2.1 eingesetzt?
+
+    Der Workdispatcher wird eingesetzt, um zeitaufwändigere Ladevorgänge zu multi-threaden. Das bewirkt zum einen eine im Gesamten schnellere Ladezeit,
+    allerdings auch dass das OS die Applikation nicht als "eingefroren" erkennt, sollte in einer gewissen Zeitspanne keine Antwort vom Programm kommen.
+
+
+Nach Bearbeitung der Aufgabe 2.1:
+   Beim Versuch, ein Schiff zu platzieren, wird jetzt an der Maus angeheftet das Schiff angezeigt.
+   Testen Sie dies aus, auch mit Einsatz der Taste R. Registrieren Sie, wie die Schiffe später aussehen sollen, 
+   auch wenn sie jetzt noch nicht platziert werden (siehe auch Abb. 1).
+
+Fragen zu Aufgabe 2.2:
+1) Welche Klasse beinhaltet die Methoden zum Verändern des Status einer Kachel im Spielfeld?
+
+FieldTile.java
+
+
+2) Wo können Sie ersehen, dass die Schiffe noch nur aus mittleren Schiffsteilen bestehen?
+
+lookupShipTile() in GameFieldRenderer.java gibt für jedes Feld, dass das Schiff belegt, nur die Textur "up.ship.middle" zurück.
+
+
+Fragen zu Aufgabe 2.3:
+1) Was müssen Sie beachten, damit die Schiffe der Länge eins korrekt im Spielfeld angezeigt werden?
+
+Der for loop in placeShip() in GameField.java muss den index mit der Schiffslänge mit echt kleiner als vergleichen, sodass lookupShipTile() nicht ausversehen einmal zu oft aufgerufen wird.
+Es muss außerdem die Textur up.ship.single oder right.ship.single, je nach Ausrichtung, zurückgegeben werden, sollte kein benachbartes Feld gefunden werden.
+
+
+2) Warum müssen die Spielfeldgrenzen beachtet werden? Was geschieht, wenn dies nicht gemacht wird?
+
+Ein Out-Of-Bounds error wird ausgelöst, sollten wir versuchen getTileAt() mit einer x und y Koordinate, die außerhalb des Feldes liegt, aufzurufen.
+Das Aufrufen der Methode getTileAt() ist nötig um nach der gleichen Schiffsinstanz auf den Nachbarsfeldern zu checken um die richtige Textur für das aktuelle Feld ausgeben zu können.

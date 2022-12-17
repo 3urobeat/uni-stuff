@@ -1,0 +1,42 @@
+                                   Fragen zum Aufgabenblatt 05
+
+Fragen zu 5.1:
+
+1. Beschreiben Sie verbal die Idee für den Algorithmus, mit dem Sie den Abstand zwischen den Schiffen implementieren wollen.
+   Fertigen Sie dazu ev. eine Skizze an.
+
+   Für die Länge des Schiffes (Menge der Felder) jeweils das Feld drüber, rechts daneben, darunter und links daneben nach nicht
+   FieldTileState STATE_WATER checken, sollte das Feld nicht OutOfBounds sein. Ist einer der Checks true, also das Feld nicht
+   unbelegt, dann Platzierung des Schiffes verhindern.
+
+2. Erklären Sie, wie Sie die erstellte Methode auf den Computerspieler übertragen können.
+   Sind Änderungen erforderlich? Wenn ja, welche sind dies im Detail?
+
+   Es sind nur leichte Änderungen notwendig.
+   - this.currentOrientationShip wird durch Übergabeparameter up festgelegt.
+   - Zugriff auf getTileAt() erfolgt anstatt mit this.field.getTileAt() mit f.getTileAt()
+   - Zugriff auf getKeepDistance() vom ruleset kann nicht direkt erfolgen sondern muss in Methode placeShipsAccordingToRules() abgefragt und dann an unsere Methode übergeben werden
+   - this.currentSelectedShipsLength ist durch Parameter length festgelegt
+
+
+Fragen zu 5.2:
+
+1. Beschreiben Sie hier verbal die Vorgehensweise, wie ihre verbesserte Strategie für den Computerspieler aussehen soll.
+   Testen Sie aus, ob der Computerspieler damit häufiger gewinnt. Hatten Sie Erfolg?
+
+   - Zufälliges Feld bombardieren
+   - Letzter Schuss war ein Treffer aber Schiff ist nicht sunken?
+   - Feld darüber oder rechts daneben bombardieren (außer das Feld ist OOB, dann in die andere Richtung gehen)
+     Den Schritt wiederholen, bis Schiff gesunken ist, oder:
+     - Letzter Schuss kein Treffer aber Schiff nicht sunken?
+       Dann müssen wir wohl noch in die andere Richtung ein Tile mit dem Schiff haben und sind soeben drüber hinaus geschossen.
+     - Da wir ja (schlauerweise) unsere Steps in Schritt 3 gezählt haben, gehen wir diese Schritte + 1 zurück und bombardieren dieses Tile dann.
+     - Schiff immernoch nicht sunken? Krass. Dann triggert ein Check in Schritt 3, der nach links/unten geht, wenn Tile rechts/oben schon bombardiert wurde.
+     - ???
+     - Profit.
+
+   Jo, man kann noch gewinnen, aber die AI ist schon stronk: https://i.imgur.com/dX24hW6.jpg
+
+   Sollte sie einmal dein Schiff gefunden haben, dann ist es weg.
+   Gut aber nicht OP da es ja immer noch zufällige Felder zwischendrin probiert und man als Spieler auch ein Schiff zum sinken bekommt sobald man einmal ein Hit hatte (100 IQ).
+   Finde ich balanced, ist in Ordnung.
