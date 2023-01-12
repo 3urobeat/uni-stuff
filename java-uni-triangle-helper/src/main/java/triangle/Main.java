@@ -1,6 +1,12 @@
 package triangle;
 
-import javafx.*;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 public class Main extends Application {
     // Command line entry
