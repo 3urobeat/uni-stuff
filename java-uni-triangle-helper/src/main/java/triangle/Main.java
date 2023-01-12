@@ -3,9 +3,10 @@ package triangle;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -26,17 +27,23 @@ public class Main extends Application {
         TextField zIn = new TextField("z value");
 
         // Create StackPane
-        StackPane root = new StackPane();
-        root.getChildren().add(xIn);
-        root.getChildren().add(yIn);
-        root.getChildren().add(zIn);
+        GridPane root = new GridPane();
+
+        root.setVgap(20);
+        root.setHgap(10);
+        root.setAlignment(Pos.CENTER);
+
+        root.add(xIn, 0, 0);
+        root.add(yIn, 0, 1);
+        root.add(zIn, 0, 2);
 
         // create a label
-        Label label = new Label("");
-        root.getChildren().add(label);
+        Label label = new Label("test");
+        label.setAlignment(Pos.CENTER);
+        root.add(label, 0, 3);
 
         // Add event to detect input and update label
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+        EventHandler<ActionEvent> event = new EventHandler<>() {
             public void handle(ActionEvent e) {
                 // Check if triangle is equilateral, isosceles or scalene
                 String state = "";
