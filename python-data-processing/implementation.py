@@ -12,9 +12,10 @@ def hellinger_distance(P, Q):
 		Returns:
 			H (np.array) mit der Hellinger-Distanz zwischen P und Q
 	"""
-	# TODO
+	
+	# We can't use loops, we must exclusively use numpy
+	return (1 / np.sqrt(2)) * np.sqrt(np.sum(np.power(np.sqrt(P) - np.sqrt(Q), 2), axis=1)) # spooky formula with eerie formatting for a crisp +35% pain inflicting buff
 
-	return np.zeros(P.shape[0])
 
 def select_best_rows(P, Q, H):
 	"""
