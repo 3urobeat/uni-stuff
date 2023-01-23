@@ -35,10 +35,12 @@ def select_best_rows(P, Q, H):
 				[[Zeile mit Verteilung aus P]
 				 [Zeile mit Verteilung aus Q]]
 	"""
-	# TODO
 
-	return np.zeros(2, P.shape[1])
-	
+	minRes = H.argmin() # Get index of smallest element
+
+	return np.matrix([ P[minRes], Q[minRes] ]) # Create new matrix and return it
+
+
 def plot_distance(H):
 	"""
 		Erstellt einen Bar-Plot des Hellinger-Distanz-Vektors.
