@@ -38,7 +38,7 @@ def select_best_rows(P, Q, H):
 
 	minRes = H.argmin() # Get index of smallest element
 
-	return np.matrix([ P[minRes], Q[minRes] ]) # Create new matrix and return it
+	return np.array([ P[minRes], Q[minRes] ]) # Create new matrix and return it
 
 
 def plot_distance(H):
